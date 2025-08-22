@@ -1,0 +1,57 @@
+# Inicialização das variáveis
+menor_altura = float('inf')  # Começa com um valor muito alto
+maior_altura = float('-inf') # Começa com um valor muito baixo
+soma_alturas_masculino = 0
+contagem_masculino = 0
+contagem_feminino = 0
+
+# Loop para coletar dados de 15 pessoas
+for i in range(15):
+    print(f"--- Pessoa {i+1} ---")
+    while True:
+        try:
+            altura = float(input("Digite a altura em metros (ex: 1.75): "))
+            if altura > 0:
+                break
+            else:
+                print("Por favor, insira uma altura válida (maior que zero).")
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um número para a altura.")
+
+    while True:
+        genero = input("Digite o gênero (M/F): ").upper()
+        if genero in ['M', 'F']:
+            break
+        else:
+            print("Gênero inválido. Por favor, digite 'M' para Masculino ou 'F' para Feminino.")
+
+    # Atualiza menor e maior altura
+    if altura < menor_altura:
+        menor_altura = altura
+    if altura > maior_altura:
+        maior_altura = altura
+
+    # Acumula para cálculo de média e contagem de gêneros
+    if genero == 'M':
+        soma_alturas_masculino += altura
+        contagem_masculino += 1
+    else:
+        contagem_feminino += 1
+
+# Cálculo da média de altura masculina
+if contagem_masculino > 0:
+    media_alturas_masculino = soma_alturas_masculino / contagem_masculino
+else:
+    media_alturas_masculino = 0 # Define 0 para evitar divisão por zero
+
+# Apresenta os resultados
+print("\n--- Resultados ---")
+print(f"A maior altura do grupo é: {maior_altura:.2f}m")
+print(f"A menor altura do grupo é: {menor_altura:.2f}m")
+
+if contagem_masculino > 0:
+    print(f"A média de altura das pessoas do gênero Masculino é: {media_alturas_masculino:.2f}m")
+else:
+    print("Não há pessoas do gênero Masculino para calcular a média de altura.")
+
+print(f"O número de pessoas do gênero Feminino é: {contagem_feminino}")
